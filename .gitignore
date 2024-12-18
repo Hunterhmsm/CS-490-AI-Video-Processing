@@ -1,0 +1,14 @@
+
+\.vscode/
+\.venv/
+*.pyc
+__pycache__/
+Pipfile.lock
+data/
+logs/
+assign01/output/
+assign02/ground/
+assign02/ground.zip
+assign03/output/
+data/
+assign04/output_UG_copy/

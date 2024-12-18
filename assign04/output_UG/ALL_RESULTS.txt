@@ -1,0 +1,95 @@
+****************************************
+APPROACHES: 
+****************************************
+
+* verybasiccnn
+	 a basic neural network with three convolutional layers and relu activations.
+
+* advancedcnn
+	 a hopefully more advanced cnn with three convolutional layers, batch normalization, and a simplified classifier.
+
+****************************************
+RESULTS:
+****************************************
+APPROACH	TRAINING_accuracy	TRAINING_f1	TESTING_accuracy	TESTING_f1
+verybasiccnn	0.6514	0.3944	0.6852	0.4066
+advancedcnn	0.7156	0.6849	0.7407	0.6995
+
+****************************************
+MODEL ARCHITECTURES:
+****************************************
+* verybasiccnn
+veryBasicCNN(
+  (features): Sequential(
+    (0): Conv3d(3, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool3d(kernel_size=(1, 2, 2), stride=(1, 2, 2), padding=0, dilation=1, ceil_mode=False)
+    (3): Conv3d(32, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+    (4): ReLU(inplace=True)
+    (5): MaxPool3d(kernel_size=(2, 2, 2), stride=(2, 2, 2), padding=0, dilation=1, ceil_mode=False)
+    (6): Conv3d(64, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+    (7): ReLU(inplace=True)
+    (8): AdaptiveAvgPool3d(output_size=(1, 1, 1))
+  )
+  (classifier): Linear(in_features=128, out_features=2, bias=True)
+)
+
++-------------------+------------+
+|      Modules      | Parameters |
++-------------------+------------+
+| features.0.weight |    2592    |
+|  features.0.bias  |     32     |
+| features.3.weight |   55296    |
+|  features.3.bias  |     64     |
+| features.6.weight |   221184   |
+|  features.6.bias  |    128     |
+| classifier.weight |    256     |
+|  classifier.bias  |     2      |
++-------------------+------------+
+Total Trainable Params: 279554
+
+* advancedcnn
+AdvancedCNN(
+  (features): Sequential(
+    (0): Conv3d(3, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+    (1): BatchNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace=True)
+    (3): MaxPool3d(kernel_size=(2, 2, 2), stride=(2, 2, 2), padding=0, dilation=1, ceil_mode=False)
+    (4): Conv3d(16, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+    (5): BatchNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU(inplace=True)
+    (7): MaxPool3d(kernel_size=(2, 2, 2), stride=(2, 2, 2), padding=0, dilation=1, ceil_mode=False)
+    (8): Conv3d(32, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+    (9): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU(inplace=True)
+    (11): AdaptiveAvgPool3d(output_size=(1, 1, 1))
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=64, out_features=32, bias=True)
+    (1): ReLU(inplace=True)
+    (2): Linear(in_features=32, out_features=2, bias=True)
+  )
+)
+
++---------------------+------------+
+|       Modules       | Parameters |
++---------------------+------------+
+|  features.0.weight  |    1296    |
+|   features.0.bias   |     16     |
+|  features.1.weight  |     16     |
+|   features.1.bias   |     16     |
+|  features.4.weight  |   13824    |
+|   features.4.bias   |     32     |
+|  features.5.weight  |     32     |
+|   features.5.bias   |     32     |
+|  features.8.weight  |   55296    |
+|   features.8.bias   |     64     |
+|  features.9.weight  |     64     |
+|   features.9.bias   |     64     |
+| classifier.0.weight |    2048    |
+|  classifier.0.bias  |     32     |
+| classifier.2.weight |     64     |
+|  classifier.2.bias  |     2      |
++---------------------+------------+
+Total Trainable Params: 72898
+

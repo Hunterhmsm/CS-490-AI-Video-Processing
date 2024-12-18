@@ -1,0 +1,46 @@
+****************************************
+APPROACHES: 
+****************************************
+
+* verybasiccnn
+	 a basic convolutional neural network with three convolutional layers and relu activations.
+
+****************************************
+RESULTS:
+****************************************
+APPROACH	TRAINING_accuracy	TRAINING_f1	TESTING_accuracy	TESTING_f1
+verybasiccnn	0.6514	0.3944	0.6852	0.4066
+
+****************************************
+MODEL ARCHITECTURES:
+****************************************
+* verybasiccnn
+veryBasicCNN(
+  (features): Sequential(
+    (0): Conv3d(3, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool3d(kernel_size=(1, 2, 2), stride=(1, 2, 2), padding=0, dilation=1, ceil_mode=False)
+    (3): Conv3d(32, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+    (4): ReLU(inplace=True)
+    (5): MaxPool3d(kernel_size=(2, 2, 2), stride=(2, 2, 2), padding=0, dilation=1, ceil_mode=False)
+    (6): Conv3d(64, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+    (7): ReLU(inplace=True)
+    (8): AdaptiveAvgPool3d(output_size=(1, 1, 1))
+  )
+  (classifier): Linear(in_features=128, out_features=2, bias=True)
+)
+
++-------------------+------------+
+|      Modules      | Parameters |
++-------------------+------------+
+| features.0.weight |    2592    |
+|  features.0.bias  |     32     |
+| features.3.weight |   55296    |
+|  features.3.bias  |     64     |
+| features.6.weight |   221184   |
+|  features.6.bias  |    128     |
+| classifier.weight |    256     |
+|  classifier.bias  |     2      |
++-------------------+------------+
+Total Trainable Params: 279554
+
